@@ -1,19 +1,27 @@
 <?php
 
+use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\ProjectionsController;
+use App\Http\Controllers\ReservationsController;
+use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\TicketsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::get("/movies", [MoviesController::class, "list"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get("/movie/{id}", [MoviesController::class, "view"]);
+
+Route::get("/projections", [ProjectionsController::class, "list"]);
+
+Route::get("/reservations", [ReservationsController::class, "list"]);
+
+Route::get("/rooms", [RoomsController::class, "list"]);
+
+Route::get("/tickets", [TicketsController::class, "list"]);
+
+Route::post("/ticket/create", [TicketsController::class, "create"]);
+
+Route::delete("/ticket/delete", [TicketsController::class, "delete"]);
+
+Route::put("/ticket/modify", [TicketsController::class, "modify"]);

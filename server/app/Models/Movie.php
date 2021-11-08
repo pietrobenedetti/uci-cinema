@@ -9,7 +9,7 @@ class Movie extends Model
 {
     use HasFactory;
 
-    public function actors() {
-        return $this->belongsToMany(Actor::class);
+    public function projections() {
+        return $this->hasMany(Projection::class);
     }
 }

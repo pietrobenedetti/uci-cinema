@@ -31,6 +31,8 @@ class AddRelsToProjectionsTable extends Migration
         Schema::table('projections', function (Blueprint $table) {
             $table->dropForeign(["movie_id"]);
             $table->dropColumn(["movie_id"]);
+            $table->dropForeign(["room_id"]);
+            $table->dropColumn(["room_id"]);
         });
     }
 }
