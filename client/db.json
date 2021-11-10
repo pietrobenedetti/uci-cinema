@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "img": "https://m.media-amazon.com/images/I/51VutIr7WIL.jpg",
+      "title": "La carica dei 101",
+      "regista": "regista1",
+      "cast": "A, B, C",
+      "genere": "Genere1",
+      "durata": "1h 49m",
+      "description": "DIOCANE"
+    },
+    {
+      "id": 2,
+      "title": "titolo2",
+      "regista": "regista2"
+    }
+  ],
+  "room": 
+    {
+      "id": 1,
+      "seats": 50,
+      "name": "rossa",
+      "rows": 5,
+      "cols": 10 
+    },
+  "profile": {
+    "name": "typicode"
+  }
+}
