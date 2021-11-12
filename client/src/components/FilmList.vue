@@ -57,7 +57,7 @@ export default {
         console.log("Prima di promise - 1");
 
         try {
-            let response = await axios.get("http://localhost:8000/movies");
+            let response = await axios.get("http://localhost:8000/api/movies");
             this.films = response.data;
         } catch (err) {
             console.log(err);

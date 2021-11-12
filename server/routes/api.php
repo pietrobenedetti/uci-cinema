@@ -14,9 +14,11 @@ Route::get("/movie/{id}", [MoviesController::class, "view"]);
 
 Route::get("/projections", [ProjectionsController::class, "list"]);
 
+Route::get("/projection/{id}", [ProjectionsController::class, "view"]);
+
 Route::get("/reservations", [ReservationsController::class, "list"]);
 
-Route::get("/rooms", [RoomsController::class, "list"]);
+Route::get("/room/{id}", [RoomsController::class, "view"]);
 
 Route::get("/tickets", [TicketsController::class, "list"]);
 

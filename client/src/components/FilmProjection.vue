@@ -38,7 +38,7 @@
                                 <div class="text-xs uppercase font-bold text-gray-600 tracking-wide">Descrizione</div>
                                 <div class="flex items-center pt-2">
                                     <div>
-                                        <p class="font-bold text-gray-900">{{film.description}}</p>
+                                        <p class="font-bold text-gray-900">{{film.title}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -68,22 +68,28 @@ export default {
     return {
       film: {},
       room: {},
-      cols: [],
-      rows: []
+      projection: {},
+      col: [],
+      row: []
     };
   },
   async mounted() {
-    let filmId = this.$route.params.id;
-    console.log(filmId);
+    let projectionId = this.$route.params.id;
+    console.log(projectionId);
 
-    let response = await axios.get("http://localhost:8000/movie/" + filmId);
-    let response_room = await axios.get("http://localhost:3000/room/");
+    let response_projection = await axios.get("http://localhost:8000/api/projection/" + projectionId);
+
+    this.projection = response_projection.data;
+    let movieId = this.projection.movie_id;
+    let response = await axios.get("http://localhost:8000/api/movie/" + movieId);
+    let roomId = this.projection.room_id;
+    let response_room = await axios.get("http://localhost:8000/api/room/" + roomId);
     //let response_exist_ticket = await axios.get("http://localhost:8000/tickets")
 
     this.film = response.data;
     this.room = response_room.data;
-    this.cols = response_room.data.cols;
-    this.rows = response_room.data.rows;
+    this.col = response_room.data.cols;
+    this.row = response_room.data.rows;
   },
   methods: {
     edit(film) {
