@@ -101,6 +101,7 @@
         <div
           v-for="row in room.rows"
           :key="row"
+          
           class="grid"
           :style="
             'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'
@@ -131,8 +132,8 @@ export default {
       film: {},
       room: {},
       projection: {},
-      col: [],
-      row: [],
+      cols: [],
+      rows: [],
       prenotation: false,
       seatTaken: []
     };
@@ -158,8 +159,9 @@ export default {
 
     this.film = response.data;
     this.room = response_room.data;
-    this.col = response_room.data.cols;
-    this.row = response_room.data.rows;
+    this.cols = response_room.data.cols;
+    this.rows = response_room.data.rows;
+    console.log(this.col, this.row, this.room)
   },
   methods: {
     edit(film) {
