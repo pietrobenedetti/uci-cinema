@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Faker\Provider\DateTime as DateTime;
 
 class ProjectionSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class ProjectionSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             DB::table('projections')->insert([
                 '3D' => rand(0, 1),
+                'date' => $faker->dateTimeBetween('now', '+1 week'),
             ]);
         }
     }
