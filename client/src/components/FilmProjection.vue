@@ -101,16 +101,15 @@
         <div
           v-for="row in room.rows"
           :key="row"
+          
           class="grid"
           :style="
             'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'
           "
         >
           <div v-for="col in room.cols" :key="col">
-            <div>
-                <button v-if="!prenotation" @click="Selected()"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
-                <button v-if="prenotation" @click="UnSelected()"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
-            </div>
+            <button v-if="!prenotation" @click="select()"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
+            <button v-if="prenotation" @click="unSelect()"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
           </div>
         </div>
       </div>
@@ -128,9 +127,10 @@ export default {
       film: {},
       room: {},
       projection: {},
-      col: [],
-      row: [],
+      cols: [],
+      rows: [],
       prenotation: false,
+      seatrow: 'row',  
     };
   },
   async mounted() {
@@ -154,8 +154,9 @@ export default {
 
     this.film = response.data;
     this.room = response_room.data;
-    this.col = response_room.data.cols;
-    this.row = response_room.data.rows;
+    this.cols = response_room.data.cols;
+    this.rows = response_room.data.rows;
+    console.log(this.col, this.row, this.room)
   },
   methods: {
     edit(film) {
@@ -175,10 +176,10 @@ export default {
           });
       }
     },
-    Selected(){
+    select(){
       this.prenotation = true;
     },
-    UnSelected(){
+    unSelect(){
          this.prenotation = false;
     }
   },
