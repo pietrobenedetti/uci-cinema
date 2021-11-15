@@ -18,6 +18,7 @@ class ProjectionSeeder extends Seeder
     {
         for ($i = 0; $i < 5; $i++) {
             DB::table('projections')->insert([
+                '3D' => rand(0, 1),
             ]);
         }
     }
