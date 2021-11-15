@@ -6,6 +6,7 @@ import './style.css';
 
 import FilmList from './components/FilmList.vue'
 import Tickets from './components/Tickets.vue'
+import FilmProjection from './components/FilmProjection.vue'
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,15 @@ const routes = [
     path: "/mytickets",
     name: "my_ticket",
     component: Tickets
+  },
+  {
+    path: "/projection/:id",
+    name: "film_projection",
+    component: FilmProjection
+  },
+  {
+    path: "",
+    redirect: "/home"
   }
 ];
 

@@ -10,4 +10,9 @@ class ProjectionsController extends Controller
     public function list() {
         return Projection::all();
     }
+
+    public function view($id) {
+        $projection = Projection::find($id);
+        return $projection;
+    }
 }

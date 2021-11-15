@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class RoomsController extends Controller
 {
-    public function list() {
-        return Room::all();
+    public function view($id) {
+        $room = Room::find($id);
+        return $room;
     }
 }
