@@ -106,12 +106,15 @@
             'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'
           "
         >
-          <div v-for="col in room.cols" :key="col">
-            <div>
-                <button v-if="!prenotation" @click="Selected()"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
-                <button v-if="prenotation" @click="UnSelected()"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
+            <div v-for="col in room.cols" :key="col">
+                <div>
+                    <button v-if="!isSeatTaken(row, col)" @click="select(row, col)"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
+                    <button v-else @click="unSelect(row, col)"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
+                </div>
             </div>
-          </div>
+            <!-- <div v-if="!seatTaken.lenght == 0">
+                <input type="text" placeholder="email ">
+            </div> -->
         </div>
       </div>
     </div>
@@ -131,6 +134,7 @@ export default {
       col: [],
       row: [],
       prenotation: false,
+      seatTaken: []
     };
   },
   async mounted() {
@@ -175,11 +179,29 @@ export default {
           });
       }
     },
-    Selected(){
-      this.prenotation = true;
+    select(row, col) {
+        this.seatTaken.push({
+            row: row - 1,
+            col: col - 1
+        });
+        console.log(this.seatTaken);
     },
-    UnSelected(){
-         this.prenotation = false;
+    isSeatTaken(row, col) {
+        let seatIsTaken = false;
+        this.seatTaken.forEach(seat => {
+            if (seat.row == (row - 1) && seat.col == (col - 1)) {
+                seatIsTaken = true;
+            }
+        });
+        return seatIsTaken;
+    },
+    unSelect(row, col){
+        let selectedSeatIndex = this.seatTaken.findIndex((seat) => {
+            if (seat.row == (row - 1) && seat.col == (col - 1)) {
+                return true;
+            }
+        });
+        this.seatTaken.splice(selectedSeatIndex, 1);
     }
   },
 
