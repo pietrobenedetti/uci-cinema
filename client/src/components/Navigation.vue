@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex-shrink-0 flex items-center">
-                    <img class="block  h-8 w-auto text-white-500" src="" alt="Logo">
+                        <h1 class="text-5xl font-light text-white">uci cinema </h1><p class="text-xl font-light text-white">©</p>
                     </div>
                     <div class="flex flex-grow ml-12">
                         <a :href="pathForHome" class="bg-purple-800 text-white px-3 py-2 rounded-md font-medium my-auto transform hover:scale-105 transition duration-500 flex-2" aria-current="page">Home</a>
@@ -54,30 +54,11 @@
                     <button type="button" class="bg-purple-800 py-2 px-3 rounded-md text-white hover:scale-105 transform transition duration-500" @click="goToTicket()">
                         <span>My Tickets</span>
                     </button>
+                    <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3" @click="goToCreateFilm()">
+                        <span>create +</span>
+                    </button>
 
-                    <!-- Profile dropdown -->
-                    <div class="ml-3 relative">
-                    <div>
-                        <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                        <span class="sr-only">Open user menu</span>
-                        <img class="h-8 w-8 rounded-full" src="" alt="">
-                        </button>
-                    </div>
-                    </div>
                 </div>
-                </div>
-            </div>
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="sm:hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-
-                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
                 </div>
             </div>
         </nav>
@@ -89,7 +70,8 @@ export default {
     data() {
         return {
             pathForHome:"/home",
-            pathForMyTickets: "my_ticket"
+            pathForMyTickets: "my_ticket",
+            pathForCreateFilm: "create_film"
         }
     },
     methods: {
@@ -97,7 +79,12 @@ export default {
             this.$router.push({
                 name: this.pathForMyTickets
             })
+        },
+        goToCreateFilm(){
+            this.$router.push({
+                name: this.pathForCreateFilm
+            })
         }
-    }
+    }, 
 }
 </script>
