@@ -19,8 +19,8 @@ class MoviesController extends Controller
     public function create(Request $request) {
         $newMovieData = json_decode($request->getContent());
 
-        $newMovie = new Movie();  
-        
+        $newMovie = new Movie();
+
         $newMovie->title = $newMovieData->title;
         $newMovie->year = $newMovieData->year;
         $newMovie->duration = $newMovieData->duration;
@@ -29,7 +29,7 @@ class MoviesController extends Controller
         $newMovie->director_img = $newMovieData->director_img;
         $newMovie->rated = $newMovieData->rated;
         $newMovie->description = $newMovieData->description;
-        $newMovie->description_long = $newMovieData->description_long;        
+        $newMovie->description_long = $newMovieData->description_long;
 
         $newMovie->save();
         return $newMovie;
@@ -37,8 +37,8 @@ class MoviesController extends Controller
 
     public function modify(Request $request, $id) {
         $movie = Movie::find($id);
-        $newMovieData = json_decode($request->getContent());   
-        
+        $newMovieData = json_decode($request->getContent());
+
         $movie->title = $newMovieData->title;
         $movie->year = $newMovieData->year;
         $movie->duration = $newMovieData->duration;
