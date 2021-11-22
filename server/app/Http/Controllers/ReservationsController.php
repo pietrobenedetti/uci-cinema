@@ -10,4 +10,9 @@ class ReservationsController extends Controller
     public function list() {
         return Reservation::all();
     }
+
+    public function view($id) {
+        $reservation = Reservation::find($id);
+        return $reservation;
+    }
 }

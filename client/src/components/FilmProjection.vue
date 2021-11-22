@@ -132,10 +132,12 @@ export default {
       film: {},
       room: {},
       projection: {},
+      reservation: {},
+      tickets: {},
       cols: [],
       rows: [],
-      prenotation: false,
-      seatTaken: []
+      seatTaken: [],
+      seatOccupied: []
     };
   },
   async mounted() {
@@ -151,16 +153,30 @@ export default {
     let response = await axios.get(
       "http://localhost:8000/api/movie/" + movieId
     );
+
     let roomId = this.projection.room_id;
     let response_room = await axios.get(
       "http://localhost:8000/api/room/" + roomId
     );
+
+    let reservationId = this.reservation.projection_id;
+    let response_reservation = await axios.get(
+      "http://localhost:8000/api/reservation/" + reservationId
+    );
+
+    let ticketId = this.tickets.reservation_id;
+    let response_tickets = await axios.get(
+      "http://localhost:8000/api/ticket/" + ticketId
+    );
+    
     //let response_exist_ticket = await axios.get("http://localhost:8000/tickets")
 
     this.film = response.data;
     this.room = response_room.data;
     this.cols = response_room.data.cols;
     this.rows = response_room.data.rows;
+    this.reservation = response_reservation.data;
+    this.tickets = response_tickets.data;
     console.log(this.col, this.row, this.room)
   },
   methods: {
@@ -190,12 +206,16 @@ export default {
     },
     isSeatTaken(row, col) {
         let seatIsTaken = false;
+        let seatIsOccupied = false;
         this.seatTaken.forEach(seat => {
-            if (seat.row == (row - 1) && seat.col == (col - 1)) {
+            if (this.tickets.row == (row - 1) && this.tickets.col == (col - 1)) {
+                seatIsOccupied = true;
+            }
+            else if (seat.row == (row - 1) && seat.col == (col - 1)) {
                 seatIsTaken = true;
             }
         });
-        return seatIsTaken;
+        return seatIsTaken, seatIsOccupied;
     },
     unSelect(row, col){
         let selectedSeatIndex = this.seatTaken.findIndex((seat) => {
@@ -205,7 +225,7 @@ export default {
         });
         this.seatTaken.splice(selectedSeatIndex, 1);
     }
-  },
+  }
 
 };
 </script>
