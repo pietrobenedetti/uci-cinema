@@ -12,6 +12,8 @@ Route::get("/movies", [MoviesController::class, "list"]);
 
 Route::get("/movie/{id}", [MoviesController::class, "view"]);
 
+Route::post("/movie/create", [MoviesController::class, "create"]);
+
 Route::get("/projections", [ProjectionsController::class, "list"]);
 
 Route::get("/projection/{id}", [ProjectionsController::class, "view"]);
@@ -22,7 +24,7 @@ Route::get("/reservations", [ReservationsController::class, "list"]);
 
 Route::get("/reservation/{id}", [ReservationsController::class, "view"]);
 
-Route::get("/rooms", [RoomsController::class, "list"]);
+Route::get("/rooms", [RoomsController::class, "index"]);
 
 Route::get("/room/{id}", [RoomsController::class, "view"]);
 
