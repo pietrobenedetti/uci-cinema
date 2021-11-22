@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             MovieSeeder::class,
             ProjectionSeeder::class,
             RoomSeeder::class,
+            ReservationSeeder::class,
+            TicketSeeder::class
         ]);
     }
 }
