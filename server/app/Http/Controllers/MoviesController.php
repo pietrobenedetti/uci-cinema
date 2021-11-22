@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MoviesController extends Controller
 {
     public function list() {
-        return Movie::all();
+        return Movie::orderBy('id', 'desc')->get();
     }
 
     public function view($id) {
