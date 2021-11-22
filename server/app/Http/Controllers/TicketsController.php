@@ -11,6 +11,11 @@ class TicketsController extends Controller
         return Ticket::all();
     }
 
+    public function view($id) {
+        $ticket = Ticket::find($id);
+        return $ticket;
+    }
+
     public function create(Request $request) {
         $newTicketData = json_decode($request->getContent());
 
