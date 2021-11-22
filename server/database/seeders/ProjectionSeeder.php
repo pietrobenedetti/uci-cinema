@@ -17,10 +17,15 @@ class ProjectionSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 5; $i++) {
+        $movieId = DB::table('movies')->pluck('id');
+        $roomId = DB::table('rooms')->pluck('id');
+
+        for ($i = 0; $i < 10; $i++) {
             DB::table('projections')->insert([
                 '3D' => rand(0, 1),
                 'date' => $faker->dateTimeBetween('now', '+1 week'),
+                'movie_id' => $faker->randomElement($movieId),
+                'room_id' => $faker->randomElement($roomId)
             ]);
         }
     }
