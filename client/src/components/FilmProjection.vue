@@ -98,6 +98,26 @@
         </div>
       </div>
       <div class="sm:w-1/2 lg:w-1/5 bg-white">
+        <div class="flex justify-between mb-3">
+            <div class="ml-2">
+                <label class="mr-2">Oggi</label>
+                <input type="checkbox" v-model="projectionToday" @click="projectionToday=false">
+            </div>
+            <div class="mr-2" >
+                <label class="mr-2">Domani</label>
+                <input type="checkbox" v-model="projectionTomorrow" @click="projectionTomorrow=false" >
+            </div>
+        </div>
+        <select v-model="selectDate">
+          <option 
+            v-for="projection in filterProjection" 
+            :key="projection.id"
+            :value="projection.date"
+          >
+            {{projection.date}}
+          </option>
+        </select>
+        <button @click="cerca()">Cerca</button>
         <div
           v-for="row in room.rows"
           :key="row"
@@ -106,7 +126,7 @@
         >
             <div v-for="col in room.cols" :key="col">
                 <div v-if="!isSeatOccupied(row, col)">
-                  <img src="" alt="">                    
+                  <img src="https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/000000/external-chair-baby-vitaliy-gorbachev-fill-vitaly-gorbachev.png"/>
                 </div>
                 <div v-else>
                   <button v-if="!isSeatTaken(row, col)" @click="select(row, col)"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
@@ -121,6 +141,7 @@
 
 <script>
 import axios from "axios";
+import _ from 'lodash';
 
 export default {
   name: "FilmsView",
@@ -128,75 +149,61 @@ export default {
     return {
       film: {},
       room: {},
-      projection: {},
+      projections: {},
+      projection: [],
+      projectionToday: false,
+      projectionTomorrow: false,
       reservation: {},
-      tickets: {},
+      ticket: {},
       cols: [],
       rows: [],
       seatTaken: [],
-      seatOccupied: []
+      seatOccupied: [],
+      selectDate: ""
     };
   },
   async mounted() {
-    let projectionId = this.$route.params.id;
-    console.log(projectionId);
+    let movieId = this.$route.params.id;
 
-    let response_projection = await axios.get(
-      "http://localhost:8000/api/projection/" + projectionId
-    );
-    this.projection = response_projection.data;
-
-    let movieId = this.projection.movie_id;
     console.log(movieId);
-    let response = await axios.get(
+    let response_movie = await axios.get(
       "http://localhost:8000/api/movie/" + movieId
     );
 
-    let roomId = this.projection.room_id;
-    console.log(roomId);
-    let response_room = await axios.get(
-      "http://localhost:8000/api/room/" + roomId
-    );
-
-    let reservationId = this.projection.id;
-    console.log(reservationId);
-    let response_reservation = await axios.get(
-      "http://localhost:8000/api/reservation/" + reservationId
-    );
-
-    let ticketId = this.projection.id;
-    console.log(ticketId);
-    let response_tickets = await axios.get(
-      "http://localhost:8000/api/ticket/" + ticketId
-    );
+    let response_projection = await axios.get("http://localhost:8000/api/projections");
     
-    //let response_exist_ticket = await axios.get("http://localhost:8000/tickets")
-
-    this.film = response.data;
-    this.room = response_room.data;
-    this.cols = response_room.data.cols;
-    this.rows = response_room.data.rows;
-    this.reservation = response_reservation.data;
-    this.tickets = response_tickets.data;
-    console.log(this.tickets);
+    this.film = response_movie.data;
+    this.projections = response_projection.data;
   },
   methods: {
-    edit(film) {
-      this.$router.push({
-        name: "films_edit",
-        params: {
-          id: film.id,
-        },
-      });
-    },
-    del() {
-      if (confirm("Vuoi cancellare davvero questo bel film?")) {
-        let filmId = this.$route.params.id;
-        axios.delete("http://localhost:3000/movies/" + filmId),
-          this.$router.push({
-            name: "films_list",
-          });
-      }
+    async cerca() { //DA FARE PORCODIO
+      console.log(this.selectDate);
+      let projectionDate = this.selectDate;
+      let response_projection = await axios.get(
+        "http://localhost:8000/api/projection/" + projectionDate
+      );
+      this.projection = response_projection.data;
+      let projectionId = this.projection.id;
+      console.log(this.projection.id);
+
+      let response_room = await axios.get(
+        "http://localhost:8000/api/room/" + projectionId
+      );
+
+      let response_reservation = await axios.get(
+        "http://localhost:8000/api/reservation/" + projectionId
+      );
+
+      let response_ticket = await axios.get(
+        "http://localhost:8000/api/ticket/" + projectionId
+      );
+
+      this.room = response_room.data;
+      this.cols = response_room.data.cols;
+      this.rows = response_room.data.rows;
+      this.reservation = response_reservation.data;
+      this.ticket = response_ticket.data;
+      console.log(this.room);
     },
     select(row, col) {
         this.seatTaken.push({
@@ -232,6 +239,17 @@ export default {
         });
         this.seatTaken.splice(selectedSeatIndex, 1);
     }
+  },
+  computed: {
+    filterProjection() {
+            if (this.projectionToday == true) {
+                return _.orderBy(this.projections, "date", "asc");
+            }
+            if (this.projectionTomorrow == true) {
+                return _.orderBy(this.projections, "date", "desc");
+            }
+            return this.projections;
+        }
   }
 };
 </script>
