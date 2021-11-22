@@ -20,6 +20,8 @@ Route::get("/reservations", [ReservationsController::class, "list"]);
 
 Route::get("/reservation/{id}", [ReservationsController::class, "view"]);
 
+Route::get("/rooms", [RoomsController::class, "list"]);
+
 Route::get("/room/{id}", [RoomsController::class, "view"]);
 
 Route::get("/tickets", [TicketsController::class, "list"]);

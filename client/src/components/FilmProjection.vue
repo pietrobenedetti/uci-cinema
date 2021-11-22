@@ -101,21 +101,18 @@
         <div
           v-for="row in room.rows"
           :key="row"
-          
           class="grid"
-          :style="
-            'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'
-          "
+          :style="'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'"
         >
             <div v-for="col in room.cols" :key="col">
-                <div>
-                    <button v-if="!isSeatTaken(row, col)" @click="select(row, col)"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
-                    <button v-else @click="unSelect(row, col)"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
+                <div v-if="!isSeatOccupied(row, col)">
+                  <img src="" alt="">                    
+                </div>
+                <div v-else>
+                  <button v-if="!isSeatTaken(row, col)" @click="select(row, col)"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
+                  <button v-else @click="unSelect(row, col)"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
                 </div>
             </div>
-            <!-- <div v-if="!seatTaken.lenght == 0">
-                <input type="text" placeholder="email ">
-            </div> -->
         </div>
       </div>
     </div>
@@ -147,24 +144,28 @@ export default {
     let response_projection = await axios.get(
       "http://localhost:8000/api/projection/" + projectionId
     );
-
     this.projection = response_projection.data;
+
     let movieId = this.projection.movie_id;
+    console.log(movieId);
     let response = await axios.get(
       "http://localhost:8000/api/movie/" + movieId
     );
 
     let roomId = this.projection.room_id;
+    console.log(roomId);
     let response_room = await axios.get(
       "http://localhost:8000/api/room/" + roomId
     );
 
-    let reservationId = this.reservation.projection_id;
+    let reservationId = this.projection.id;
+    console.log(reservationId);
     let response_reservation = await axios.get(
       "http://localhost:8000/api/reservation/" + reservationId
     );
 
-    let ticketId = this.tickets.reservation_id;
+    let ticketId = this.projection.id;
+    console.log(ticketId);
     let response_tickets = await axios.get(
       "http://localhost:8000/api/ticket/" + ticketId
     );
@@ -177,7 +178,7 @@ export default {
     this.rows = response_room.data.rows;
     this.reservation = response_reservation.data;
     this.tickets = response_tickets.data;
-    console.log(this.col, this.row, this.room)
+    console.log(this.tickets);
   },
   methods: {
     edit(film) {
@@ -199,33 +200,38 @@ export default {
     },
     select(row, col) {
         this.seatTaken.push({
-            row: row - 1,
-            col: col - 1
+            row,
+            col
         });
         console.log(this.seatTaken);
     },
     isSeatTaken(row, col) {
         let seatIsTaken = false;
-        let seatIsOccupied = false;
         this.seatTaken.forEach(seat => {
-            if (this.tickets.row == (row - 1) && this.tickets.col == (col - 1)) {
-                seatIsOccupied = true;
-            }
-            else if (seat.row == (row - 1) && seat.col == (col - 1)) {
-                seatIsTaken = true;
+            if (seat.row == row && seat.col == col) {
+              seatIsTaken = true;
             }
         });
-        return seatIsTaken, seatIsOccupied;
+        return seatIsTaken;
+    },
+    isSeatOccupied(row, col) {
+        let seatIsOccupied = false;
+        this.seatOccupied = this.tickets;
+        this.seatOccupied.forEach(tickets => {
+            if (tickets.row == row && tickets.col == col) {
+              seatIsOccupied = true;
+            }
+        });
+        return seatIsOccupied;
     },
     unSelect(row, col){
         let selectedSeatIndex = this.seatTaken.findIndex((seat) => {
-            if (seat.row == (row - 1) && seat.col == (col - 1)) {
+            if (seat.row == row && seat.col == col) {
                 return true;
             }
         });
         this.seatTaken.splice(selectedSeatIndex, 1);
     }
   }
-
 };
 </script>
