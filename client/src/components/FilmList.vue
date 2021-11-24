@@ -17,7 +17,9 @@
                                     <h2 class="text-3xl font-light">titolo: {{ film.title }}</h2>
                                     <h2 class="text-l font-light">anno: {{ film.year }}</h2>
                                     <h2 class="text-l font-light">durata: {{ film.duration }} minuti</h2>
-                                    <h2 class="text-l font-light">{{ film.register }}</h2>
+                                    <h2 class="text-l font-light">regia di: {{ film.director }}</h2>
+                                    <h2 class="text-l font-light">valutazione: {{ film.rated }} stelle</h2>
+                                    <h2 class="text-l font-light">descrizione: {{ film.description }}</h2>
                             <div class="flex flex-row float-right mt-5">
                                 <button @click="goToFilm(film)" class="inline-block bg-red-300 hover:bg-red-400 text-white font-bold py-6 px-8 rounded-xl uppercase transition duration-200">Acquista</button>
                             </div>

@@ -11,4 +11,9 @@ class RoomsController extends Controller
         $room = Room::find($id);
         return $room;
     }
+
+    public function index(){
+        $room = Room::all();
+        return $room;
+    }
 }
