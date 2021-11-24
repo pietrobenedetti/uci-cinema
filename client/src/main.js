@@ -8,6 +8,7 @@ import FilmList from './components/FilmList.vue'
 import Tickets from './components/Tickets.vue'
 import FilmProjection from './components/FilmProjection.vue'
 import CreateFilm from './components/CreateFilm.vue'
+import CreateProjections from './components/CreateProjections.vue'
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
     path:"/create/film",
     name:"create_film",
     component:CreateFilm,
+  },
+  {
+    path:"/create/projections",
+    name:"create_projections",
+    component:CreateProjections,
   },
   {
     path: "",

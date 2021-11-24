@@ -18,6 +18,8 @@ Route::get("/projections", [ProjectionsController::class, "list"]);
 
 Route::get("/projection/{id}", [ProjectionsController::class, "view"]);
 
+Route::post("/projection/create", [ProjectionsController::class, "create"]);
+
 Route::get("/projection/{date}", [ProjectionsController::class, "filter"]);
 
 Route::get("/reservations", [ReservationsController::class, "list"]);
