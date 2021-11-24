@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-200 font-sans">
-    <div class="flex items-center justify-start">
+    <div class="flex justify-start">
       <div class="sm:w-1/2 lg:w-1/3 py-6 px-3">
         <div class="bg-white shadow-xl rounded-lg overflow-hidden">
           <div class="relative bg-cover bg-center h-96 p-4">
@@ -22,8 +22,8 @@
             </div>
           </div>
           <div class="p-4">
-            <div class="flex inline-flex uppercase tracking-wide">
-              <svg
+            <div class="flex inline-flex tracking-wide w-full">
+              <!-- <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"
                 fill="none"
@@ -36,12 +36,13 @@
                   stroke-width="2"
                   d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                 />
-              </svg>
-              <p class="ml-3 font-bold text-gray-900">{{ film.title }}</p>
+              </svg> -->
+              <p class="mr-auto font-bold text-gray-900">Direttore: {{ film.director }}</p>
+              <p>Valutazione: {{ film.rated }} stelle</p>
             </div>
-            <p class="text-3xl text-gray-900">{{ film.genere }}</p>
+            <p class="text-3xl text-gray-900 uppercase">{{ film.title }}</p>
           </div>
-          <div class="flex p-4 border-t border-gray-300 text-gray-700">
+          <div class="flex p-4 border-t border-gray-300 text-gray-700 justify-items-stretch w-full">
             <div class="flex-1 inline-flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,28 +59,17 @@
                 />
               </svg>
               <p>
-                <span class="text-gray-900 font-bold">Stagioni:</span>
-                {{ film.cast }}
+                <span class="text-gray-900 font-bold">Durata:
+                {{ film.duration }} min </span>
               </p>
             </div>
             <div class="flex-1 inline-flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <p>
-                <span class="text-gray-900 font-bold">Episodi:</span>
-                {{ film.durata }}
+                <span class="text-gray-900 font-bold">Anno:
+                {{ film.year }} </span>
               </p>
             </div>
           </div>
@@ -91,14 +81,14 @@
             </div>
             <div class="flex items-center pt-2">
               <div>
-                <p class="font-bold text-gray-900">{{ film.title }}</p>
+                <p class="font-bold text-gray-900">{{ film.description_long }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="sm:w-1/2 lg:w-1/5 bg-white">
-        <div class="flex justify-between mb-3">
+      <div class="sm:w-1/2 lg:w-1/3 my-6 mx-3 py-6 px-3">
+        <!-- <div class="flex justify-between mb-3">
             <div class="ml-2">
                 <label class="mr-2">Oggi</label>
                 <input type="checkbox" v-model="projectionToday" @click="projectionToday=false">
@@ -107,28 +97,28 @@
                 <label class="mr-2">Domani</label>
                 <input type="checkbox" v-model="projectionTomorrow" @click="projectionTomorrow=false" >
             </div>
-        </div>
-        <select v-model="selectDate">
+        </div> -->
+        <select v-model="selectDate" class="bg-white rounded">
           <option 
-            v-for="projection in filterProjection" 
+            v-for="projection in projections" 
             :key="projection.id"
-            :value="projection.date"
+            :value="projection.id"
           >
             {{projection.date}}
           </option>
         </select>
-        <button @click="cerca()">Cerca</button>
+        <button @click="cerca()" class="px-2 bg-red-700 mx-2 text-white rounded">Cerca</button>
         <div
           v-for="row in room.rows"
           :key="row"
-          class="grid"
+          class="grid mt-3"
           :style="'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'"
         >
             <div v-for="col in room.cols" :key="col">
-                <div v-if="!isSeatOccupied(row, col)">
+                <!-- <div v-if="!isSeatOccupied(row, col)">
                   <img src="https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/000000/external-chair-baby-vitaliy-gorbachev-fill-vitaly-gorbachev.png"/>
-                </div>
-                <div v-else>
+                </div> -->
+                <div>
                   <button v-if="!isSeatTaken(row, col)" @click="select(row, col)"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-lineal-kiranshastry.png"/></button>
                   <button v-else @click="unSelect(row, col)"><img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-armchair-furniture-kiranshastry-solid-kiranshastry.png"/></button>
                 </div>
@@ -141,7 +131,7 @@
 
 <script>
 import axios from "axios";
-import _ from 'lodash';
+//import _ from 'lodash';
 
 export default {
   name: "FilmsView",
@@ -150,9 +140,7 @@ export default {
       film: {},
       room: {},
       projections: {},
-      projection: [],
-      projectionToday: false,
-      projectionTomorrow: false,
+      projection: {},
       reservation: {},
       ticket: {},
       cols: [],
@@ -170,13 +158,13 @@ export default {
       "http://localhost:8000/api/movie/" + movieId
     );
 
-    let response_projection = await axios.get("http://localhost:8000/api/projections");
+    let response_projections = await axios.get("http://localhost:8000/api/projections");
     
     this.film = response_movie.data;
-    this.projections = response_projection.data;
+    this.projections = response_projections.data;
   },
   methods: {
-    async cerca() { //DA FARE PORCODIO
+    async cerca() { 
       console.log(this.selectDate);
       let projectionDate = this.selectDate;
       let response_projection = await axios.get(
@@ -186,24 +174,27 @@ export default {
       let projectionId = this.projection.id;
       console.log(this.projection.id);
 
+      let roomId = this.projection.room_id;
       let response_room = await axios.get(
-        "http://localhost:8000/api/room/" + projectionId
+        "http://localhost:8000/api/room/" + roomId
       );
+      this.room = response_room.data;
+      this.cols = response_room.data.cols;
+      this.rows = response_room.data.rows;
+      console.log(this.room, this.cols, this.rows);
 
       let response_reservation = await axios.get(
         "http://localhost:8000/api/reservation/" + projectionId
       );
-
-      let response_ticket = await axios.get(
-        "http://localhost:8000/api/ticket/" + projectionId
-      );
-
-      this.room = response_room.data;
-      this.cols = response_room.data.cols;
-      this.rows = response_room.data.rows;
       this.reservation = response_reservation.data;
+      console.log(this.reservation);
+      
+      let ticketId = this.reservation.id;
+      let response_ticket = await axios.get(
+        "http://localhost:8000/api/ticket/" + ticketId
+      );
       this.ticket = response_ticket.data;
-      console.log(this.room);
+      console.log(this.ticket);
     },
     select(row, col) {
         this.seatTaken.push({
@@ -221,16 +212,16 @@ export default {
         });
         return seatIsTaken;
     },
-    isSeatOccupied(row, col) {
-        let seatIsOccupied = false;
-        this.seatOccupied = this.tickets;
-        this.seatOccupied.forEach(tickets => {
-            if (tickets.row == row && tickets.col == col) {
-              seatIsOccupied = true;
-            }
-        });
-        return seatIsOccupied;
-    },
+    // isSeatOccupied(row, col) {
+    //     let seatIsOccupied = false;
+    //     this.seatOccupied = this.ticket;
+    //     this.seatOccupied.forEach(tickets => {
+    //         if (tickets.row == row && tickets.col == col) {
+    //           seatIsOccupied = true;
+    //         }
+    //     });
+    //     return seatIsOccupied;
+    // },
     unSelect(row, col){
         let selectedSeatIndex = this.seatTaken.findIndex((seat) => {
             if (seat.row == row && seat.col == col) {
@@ -239,17 +230,6 @@ export default {
         });
         this.seatTaken.splice(selectedSeatIndex, 1);
     }
-  },
-  computed: {
-    filterProjection() {
-            if (this.projectionToday == true) {
-                return _.orderBy(this.projections, "date", "asc");
-            }
-            if (this.projectionTomorrow == true) {
-                return _.orderBy(this.projections, "date", "desc");
-            }
-            return this.projections;
-        }
   }
 };
 </script>

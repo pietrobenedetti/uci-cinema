@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="bg-gray-800 p-6">
+        <nav class="bg-gray-800 p-6 flex">
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex-shrink-0 flex items-center">
-                        <h1 class="text-5xl font-light text-white">uci cinema </h1><p class="text-xl font-light text-white">©</p>
+                        <h1 class="text-5xl font-light text-white">UCI Cinema </h1><p class="text-xl font-light text-white">©</p>
                     </div>
                     <div class="flex flex-grow ml-12">
                         <a :href="pathForHome" class="bg-purple-800 text-white px-3 py-2 rounded-md font-medium my-auto transform hover:scale-105 transition duration-500 flex-2" aria-current="page">Home</a>
@@ -55,7 +55,7 @@
                         <span>My Tickets</span>
                     </button>
                     <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3" @click="goToCreateFilm()">
-                        <span>create +</span>
+                        <span>Create +</span>
                     </button>
                     <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3">
                         <a href="/create/projections">create projections +</a>

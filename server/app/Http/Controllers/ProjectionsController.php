@@ -17,8 +17,9 @@ class ProjectionsController extends Controller
         return $projection;
     }
 
-    public function filter($date) {
-        $projection = Projection::where('date', '=', $date);
+    public function filter($id) {
+        Log::info($id);
+        $projection = Projection::where('id', '=', $id)->first();
         return $projection;
     }
 
