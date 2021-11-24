@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Projection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProjectionsController extends Controller
 {
@@ -16,8 +17,9 @@ class ProjectionsController extends Controller
         return $projection;
     }
 
-    public function filter($date) {
-        $projection = Projection::where('date', '=', $date)->get();
+    public function filter($id) {
+        Log::info($id);
+        $projection = Projection::where('id', '=', $id)->first();
         return $projection;
     }    
 }
