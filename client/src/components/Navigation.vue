@@ -57,7 +57,9 @@
                     <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3" @click="goToCreateFilm()">
                         <span>create +</span>
                     </button>
-
+                    <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3">
+                        <a href="/create/projections">create projections +</a>
+                    </button>
                 </div>
                 </div>
             </div>
