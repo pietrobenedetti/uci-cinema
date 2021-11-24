@@ -14,12 +14,12 @@
                                 </div>
                             </div>
                             <div class="flex flex-col p-4 ml-10 justify-between">
-                                    <h2 class="text-3xl font-light">Titolo: {{ film.title }}</h2>
-                                    <h2 class="text-l font-light">Anno: {{ film.year }}</h2>
-                                    <h2 class="text-l font-light">Durata: {{ film.duration }} minuti</h2>
-                                    <h2 class="text-l font-light">Regia di: {{ film.director }}</h2>
-                                    <h2 class="text-l font-light">Valutazione: {{ film.rated }} stelle</h2>
-                                    <h2 class="text-l font-light">Descrizione: {{ film.description }}</h2>
+                                    <h2 class="text-3xl font-light"><span class="font-bold">Titolo: </span><span class="uppercase">{{ film.title }}</span></h2>
+                                    <h2 class="text-l font-light"><span class="font-bold">Anno: </span>{{ film.year }}</h2>
+                                    <h2 class="text-l font-light"><span class="font-bold">Durata: </span>{{ film.duration }} minuti</h2>
+                                    <h2 class="text-l font-light"><span class="font-bold">Rega di: </span>{{ film.director }}</h2>
+                                    <h2 class="text-l font-light"><span class="font-bold">Valutazione: </span>{{ film.rated }} stelle</h2>
+                                    <h2 class="text-l font-light"><span class="font-bold">Descrizione: </span>{{ film.description }}</h2>
                             <div class="flex flex-row float-right mt-5">
                                 <button @click="goToFilm(film)" class="inline-block bg-red-300 hover:bg-red-400 text-white font-bold py-6 px-8 rounded-xl uppercase transition duration-200">Acquista</button>
                             </div>

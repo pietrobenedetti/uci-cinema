@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="bg-gray-800 p-6 flex">
+        <nav class="w-full bg-gray-800 p-6 flex">
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -34,7 +34,7 @@
                         <h1 class="text-5xl font-light text-white">UCI Cinema </h1><p class="text-xl font-light text-white">©</p>
                     </div>
                     <div class="flex flex-grow ml-12">
-                        <a :href="pathForHome" class="bg-purple-800 text-white px-3 py-2 rounded-md font-medium my-auto transform hover:scale-105 transition duration-500 flex-2" aria-current="page">Home</a>
+                        <a :href="pathForHome" class="flex items-center bg-purple-800 text-white px-3 py-2 rounded-md font-medium my-auto transform hover:scale-105 transition duration-500 flex-2" aria-current="page">Home</a>
                         <div class="ml-8 flex p-2 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 align-center justify-between w-96">
                             <div class="flex bg-gray-100 rounded-lg p- m-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,23 +42,23 @@
                                 </svg>
                                 <input class="bg-gray-100 outline-none rounded-xl w-56" type="text" placeholder="Film, Actor..." />
                             </div>
-                            <div class="bg-indigo-600 py-2 px-3 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer h-12">
-                                <div class="my-auto">
-                                    <span>Search</span>
-                                </div>
+                            <div class="flex items-center bg-indigo-600 my-auto px-3 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer h-12">
+                                <span>
+                                    Search
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button type="button" class="bg-purple-800 py-2 px-3 rounded-md text-white hover:scale-105 transform transition duration-500" @click="goToTicket()">
+                    <!-- <button type="button" class="bg-purple-800 py-2 px-3 rounded-md text-white hover:scale-105 transform transition duration-500" @click="goToTicket()">
                         <span>My Tickets</span>
+                    </button> -->
+                    <button type="button" class="flex items-center py-2 bg-green-400 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3" @click="goToCreateFilm()">
+                        <span>Create Film</span>
                     </button>
-                    <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3" @click="goToCreateFilm()">
-                        <span>Create +</span>
-                    </button>
-                    <button type="button" class="bg-green-400 py-2 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3">
-                        <a href="/create/projections">create projections +</a>
+                    <button type="button" class="flex items-center py-2 bg-green-400 px-3 rounded-md text-white hover:bg-green-600 duration-500 ml-3">
+                        <a href="/create/projections">Create Projection</a>
                     </button>
                 </div>
                 </div>

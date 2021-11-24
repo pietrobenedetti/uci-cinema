@@ -37,7 +37,7 @@
                   d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                 />
               </svg> -->
-              <p class="mr-auto font-bold text-gray-900">Direttore: {{ film.director }}</p>
+              <p class="mr-auto font-bold text-gray-900">Regia di: {{ film.director }}</p>
               <p>Valutazione: {{ film.rated }} stelle</p>
             </div>
             <p class="text-3xl text-gray-900 uppercase">{{ film.title }}</p>
@@ -81,7 +81,7 @@
             </div>
             <div class="flex items-center pt-2">
               <div>
-                <p class="font-bold text-gray-900">{{ film.description_long }}</p>
+                <p class="text-gray-900">{{ film.description_long }}</p>
               </div>
             </div>
           </div>
