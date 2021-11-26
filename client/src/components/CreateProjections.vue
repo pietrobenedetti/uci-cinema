@@ -83,7 +83,7 @@ export default {
     },
     methods:{
         async createProjection(){
-            console.log(this.projection.treD)
+            console.log(this.projection.tre_d)
             console.log(this.projection)
             let request = await axios.post('http://localhost:8000/api/projection/create', this.projection);
             console.log(request.data)

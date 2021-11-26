@@ -16,8 +16,20 @@
                 <div class="w-full mt-4 border rounded-lg">
                     <input type="text" v-model="newFilm.director" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" placeholder="Registra" required/>
                 </div>
+                <div class="w-full mt-4 border rounded-lg">
+                    <input type="text" v-model="newFilm.img" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" placeholder="Immagine" required/>
+                </div>
+                <div class="w-full mt-4 border rounded-lg">
+                    <input type="text" v-model="newFilm.director_img" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" placeholder="Immagine Regista" required/>
+                </div>
+                <div class="w-full mt-4 border rounded-lg">
+                    <input type="text" v-model="newFilm.rated" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" placeholder="Valutazione" required/>
+                </div>
                 <div class="w-full mt-4 mb-4 border rounded-lg">
                     <textarea type="text" v-model="newFilm.description" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:outline-none" id="year"  placeholder="Inserisci una descrizione..."/>
+                </div>
+                <div class="w-full mt-4 mb-4 border rounded-lg">
+                    <textarea type="text" v-model="newFilm.description_long" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:outline-none" id="year"  placeholder="Inserisci una descrizione..."/>
                 </div>
                 <div class="w-full mt-4">
                     <button @click="createFilm()" class="w-full flex h-12 justify-center items-center font-normal hover:bg-purple-600 text-2xl text-white bg-purple-500 case rounded-lg">Crea
@@ -32,10 +44,12 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
     data() {
         return{
-            newFilm:{
+            newFilm:
+            {
                 title: '',
                 year:'',
                 duration:'',
@@ -46,7 +60,7 @@ export default {
     },
     async mounted() {
         try {
-            let response = await axios.get("http://localhost:8000/api/rooms");
+            let response = await axios.get('http://localhost:8000/api/rooms');
             this.rooms = response.data;
         } catch (err) {
             console.log(err);
@@ -54,10 +68,12 @@ export default {
     },
     methods:{
         async createFilm(){
-            console.log(this.newFilm)
+            console.log(this.newFilm.title);
+            console.log(this.newFilm);
             let request = await axios.post('http://localhost:8000/api/movie/create', this.newFilm);
             console.log(request.data)
+            this.created = true;
         }
-    }
+    },
 }
 </script>

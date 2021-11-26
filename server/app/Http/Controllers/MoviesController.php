@@ -16,9 +16,8 @@ class MoviesController extends Controller
         return $movie;
     }
 
-    public function create(Request $request) {
+    public function create(Request $request){
         $newMovieData = json_decode($request->getContent());
-
         $newMovie = new Movie();
 
         $newMovie->title = $newMovieData->title;
