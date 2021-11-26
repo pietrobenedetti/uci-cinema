@@ -1,12 +1,12 @@
 <template>
-    <div class="w-full h-full flex bg-indigo-900 justify-item-center">
-        <div class="w-1/3 m-w-450 m-auto mt-10 h-auto rounded-lg bg-white py-8 px-7">
+    <div class="flex bg-indigo-900 justify-item-center h-screen">
+        <div class="w-1/3 m-w-450 m-auto mt-10 rounded-lg bg-white py-8 px-7">
             <h1 class="text-4xl font-bold text-gray-600 text-center">Create a new projection</h1>
             <hr class="border-3 border-black mt-5 mb-5">
             <div class="w-full mt-6">
                 <h1 class="text-gray-700">Quando?</h1>
                 <div class="w-full border rounded-lg mt-3">
-                    <input type="date" v-model="projection.date" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" id="titolo" placeholder="titolo" required/>
+                    <input type="datetime-local" v-model="projection.date" class="w-full py-2.5 px-4 rounded-lg bg-gray-100 focus:shadow focus:bg-white focus:outline-none" required/>
                 </div>
                 <div class="block mt-3">
                     <span class="text-gray-700 ">Proiezione il 3d?</span>
@@ -62,12 +62,13 @@ export default {
         return{
             rooms:{},
             movies:{},
-            projection:{
+            projection:
+            {
                 date:'',
                 tre_d: 1,
                 movie_id:'',
                 room_id:'',
-                },
+            },
             created: false
         }
     },

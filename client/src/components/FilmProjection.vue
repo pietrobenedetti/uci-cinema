@@ -1,25 +1,10 @@
 <template>
-  <div class="bg-gray-200 font-sans">
+  <div class="bg-gray-200 font-sans h-full">
     <div class="flex justify-start">
       <div class="sm:w-1/2 lg:w-1/3 py-6 px-3">
         <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-          <div class="relative bg-cover bg-center h-96 p-4">
-            <img
-              :src="film.img"
-              alt=""
-              class="absolute inset-0 z-10 bg-cover bg-center h-full w-full"
-            />
-            <div class="flex justify-end">
-              <svg
-                class="h-6 w-6 text-white fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12.76 3.76a6 6 0 0 1 8.48 8.48l-8.53 8.54a1 1 0 0 1-1.42 0l-8.53-8.54a6 6 0 0 1 8.48-8.48l.76.75.76-.75zm7.07 7.07a4 4 0 1 0-5.66-5.66l-1.46 1.47a1 1 0 0 1-1.42 0L9.83 5.17a4 4 0 1 0-5.66 5.66L12 18.66l7.83-7.83z"
-                ></path>
-              </svg>
-            </div>
+          <div class="relative bg-cover bg-center h-96">
+            <img :src="film.img" alt="" class="absolute inset-0 z-10 bg-cover bg-center h-full w-full"/>
           </div>
           <div class="p-4">
             <div class="flex inline-flex tracking-wide w-full">
@@ -88,6 +73,7 @@
         </div>
       </div>
       <div class="sm:w-1/2 lg:w-1/3 my-6 mx-3 py-6 px-3">
+        <h2 class="text-light p-2">Seleziona la data:</h2>
         <!-- <div class="flex justify-between mb-3">
             <div class="ml-2">
                 <label class="mr-2">Oggi</label>
@@ -99,21 +85,12 @@
             </div>
         </div> -->
         <select v-model="selectDate" class="bg-white rounded">
-          <option 
-            v-for="projection in projections" 
-            :key="projection.id"
-            :value="projection.id"
-          >
+          <option v-for="projection in projections" :key="projection.id" :value="projection.id">
             {{projection.date}}
           </option>
         </select>
-        <button @click="cerca()" class="px-2 bg-red-700 mx-2 text-white rounded">Cerca</button>
-        <div
-          v-for="row in room.rows"
-          :key="row"
-          class="grid mt-3"
-          :style="'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'"
-        >
+        <button @click="cerca()" class="px-2 bg-purple-800 mx-2 text-white rounded">Cerca</button>
+        <div v-for="row in room.rows" :key="row" class="grid mt-3" :style="'grid-template-columns: repeat(' + room.cols + ', minmax(0, 1fr))'">
             <div v-for="col in room.cols" :key="col">
                 <!-- <div v-if="!isSeatOccupied(row, col)">
                   <img src="https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/000000/external-chair-baby-vitaliy-gorbachev-fill-vitaly-gorbachev.png"/>

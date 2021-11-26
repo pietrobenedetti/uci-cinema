@@ -7,23 +7,39 @@
             <div v-if="!isLoading">
                 <div v-for="film in films" :key="film.id">
                     <div class="overflow-auto flex-grow">
-                        <div class="bg-gray-50 mx-10 rounded-xl shadow-lg shadow-white px-8 py-6 flex items-center border-b border-gray-300">
-                            <div class="flex ml-4">
-                                <div class="bg-black w-52 h-80 rounded-xl">
-                                    <img :src="film.img" class="object-cover rounded object-top w-auto h-full hover:opacity-30" />
+                        <div class="flex bg-gray-50 mx-10 rounded-2xl px-8 py-6 border-8 border-gray-300">
+                            <div class="grid grid-cols-8">
+                                <div class="flex flex-col ml-4">
+                                    <div class="w-52 h-80 rounded-xl">
+                                        <img :src="film.img" class="object-cover rounded-md w-auto h-full" />
+                                    </div>
+                                </div>
+                                <div class="col-span-7 flex flex-col p-4 ml-20 justify-around">
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-3xl font-light"><span class="font-bold">Titolo: </span><span class="uppercase">{{ film.title }}</span></h2>
+                                    </div>
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-l font-light"><span class="font-bold">Anno: </span>{{ film.year }}</h2>
+                                    </div>
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-l font-light"><span class="font-bold">Durata: </span>{{ film.duration }} minuti</h2>
+                                    </div>
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-l font-light"><span class="font-bold">Rega di: </span>{{ film.director }}</h2>
+                                    </div>
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-l font-light"><span class="font-bold">Valutazione: </span>{{ film.rated }} / 5 ★</h2>
+                                    </div>
+                                    <div class="flex items-center border-b border-gray-200">
+                                        <h2 class="text-l font-light"><span class="font-bold">Descrizione: </span>{{ film.description }}</h2>
+                                    </div>
+                                    <div class="flex flex-row float-right mt-5">
+                                        <button @click="goToFilm(film)" class="inline-block bg-red-300 hover:bg-red-400 text-white font-bold py-6 px-8 rounded-xl uppercase transition duration-200">Acquista</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex flex-col p-4 ml-10 justify-between">
-                                    <h2 class="text-3xl font-light"><span class="font-bold">Titolo: </span><span class="uppercase">{{ film.title }}</span></h2>
-                                    <h2 class="text-l font-light"><span class="font-bold">Anno: </span>{{ film.year }}</h2>
-                                    <h2 class="text-l font-light"><span class="font-bold">Durata: </span>{{ film.duration }} minuti</h2>
-                                    <h2 class="text-l font-light"><span class="font-bold">Rega di: </span>{{ film.director }}</h2>
-                                    <h2 class="text-l font-light"><span class="font-bold">Valutazione: </span>{{ film.rated }} stelle</h2>
-                                    <h2 class="text-l font-light"><span class="font-bold">Descrizione: </span>{{ film.description }}</h2>
-                            <div class="flex flex-row float-right mt-5">
-                                <button @click="goToFilm(film)" class="inline-block bg-red-300 hover:bg-red-400 text-white font-bold py-6 px-8 rounded-xl uppercase transition duration-200">Acquista</button>
-                            </div>
-                            </div>
+                            
+                            
                         </div>
                         <hr class="border-3 border-white mt-7 mb-7">
                     </div>
